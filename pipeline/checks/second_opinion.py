@@ -78,14 +78,14 @@ def run(ds, cfg, preds=None):
             name = ds.classes[pc] if 0 <= pc < len(ds.classes) else pc
             if not cands:
                 issues.append(_warn("POSSIBLE_MISSING", stem, f"model thấy {name} (conf {conf:.2f}) mà nhãn không có box",
-                                    conf=conf))
+                                    conf=conf, box=list(box)))    # box của model: để người/công cụ biết vật ở đâu
             elif same:                                            # có nhãn cùng lớp: chỉ cờ khi ôm lệch
                 if max(same) < c["iou_loose"]:
                     issues.append(_warn("POSSIBLE_LOOSE_BOX", stem, f"box {name} lệch/lỏng (IoU {max(same):.2f})",
-                                        conf=conf, iou=round(max(same), 4)))
+                                        conf=conf, iou=round(max(same), 4), box=list(box)))
             elif max(other) >= c["iou_match"]:                    # chỉ có nhãn khác lớp, chồng rõ
                 issues.append(_warn("POSSIBLE_WRONG_CLASS", stem, f"model nói {name} (conf {conf:.2f}), nhãn ghi lớp khác",
-                                    conf=conf, iou=round(max(other), 4)))
+                                    conf=conf, iou=round(max(other), 4), box=list(box)))
             # còn lại (khác lớp, IoU trong [iou_missing, iou_match)): mơ hồ, không cờ
 
         # B) nhãn không khớp vật nào model thấy (conf >= fp_conf, KHÔNG lọc diện tích)
