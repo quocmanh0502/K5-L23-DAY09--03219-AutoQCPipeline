@@ -25,6 +25,11 @@ TODO(học viên): **một chỗ calibration có thể đánh lừa bạn**, kè
 ## 4. Cửa chặn và điều pipeline KHÔNG bắt được
 TODO(học viên): (a) chứng minh gate chặn đúng: chạy `python -m pipeline.run --budget 0 --reports work/rep_nb --export-dir work/exp_nb` (không có người duyệt nên ảnh thiếu file nhãn còn nguyên), chỉ ra kết luận **Rework**, mã thoát 20 và việc **không xuất** dataset. (Đừng sửa tay `work/run/ds`: pipeline dựng lại thư mục này từ raw mỗi lần chạy.) (b) ≥ 2 điểm mù có bằng chứng (box lỏng nhẹ, nhầm lớp mà model lớn cũng nhầm, ảnh trùng biến đổi mạnh…).
 
+**Lỗi tự nhìn thấy khi xem ảnh** (`scripts/viz_labels.py` → `work/viz/`, lô raw):
+1. **Thiếu box người**: trong ảnh có người nhưng nhãn không có box `person` cho người đó (thiếu nhãn). Ảnh: TODO(học viên).
+2. **Gán sai lớp**: box ôm đúng vật nhưng ghi sai tên lớp. Ảnh: TODO(học viên).
+3. **Box không ôm hết vật**: box nhỏ hơn vật, cắt mất một phần diện tích. Ảnh: TODO(học viên).
+
 ## 5. Train: raw vs clean (tùy chọn, chấm riêng)
 Chưa train: ghi "chưa chạy" và lý do, rồi bỏ qua phần còn lại của mục này. Nếu đã train: dán bảng từ `submission/results/comparison.md` (model, epoch, seed, số ảnh train mỗi biến thể).
 
